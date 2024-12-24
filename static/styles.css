@@ -1,11 +1,19 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+    background-color: #ac2709;
     padding: 20px;
 }
 
 h1 {
+    font-family: cursive;
+    font-size: 50px;
     text-align: center;
+    color: #ebde21
+}
+
+#clues {
+    font-family: cursive;
+    color: #ebde21
 }
 
 #crossword-container {
@@ -18,12 +26,12 @@ h1 {
 
 table {
     border-collapse: collapse;
-    background-color: #ffffff;
+    background-color: #ebde21;
     margin: 20px auto;
 }
 
 td {
-    border: 1px solid #cccccc;
+    border: 1px solid #108428;
     width: 30px;
     height: 30px;
     text-align: center;
@@ -36,14 +44,14 @@ input[type="text"] {
     text-align: center;
     border: none;
     font-size: 16px;
-    background-color: #e9ecef;
+    background-color: #ebde21;
     box-sizing: border-box;
 }
 
 .no-input {
     width: 100%;
     height: 100%;
-    background-color: #000;
+    background-color: #108428;
 }
 
 .clue-number {
@@ -51,7 +59,7 @@ input[type="text"] {
     top: 0;
     left: 0;
     font-size: 10px;
-    color: black;
+    color: rgb(35, 33, 33);
     line-height: 1; /* reduce line height for tight fitting */
 }
 
@@ -70,8 +78,8 @@ li.error {
 
 #congrats-banner {
     display: none; /* Hidden by default */
-    background-color: #28a745; /* A soothing green background for success */
-    color: #ffffff; /* White text for contrast */
+    background-color: #108428; /* blue background for success */
+    color: #ebde21; /* White text for contrast */
     padding: 15px;
     text-align: center;
     position: fixed;
