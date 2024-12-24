@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Til Jonas&lt;3 </title>
+    <title>ditt julekryssord </title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <script src="{{ url_for('static', filename='arrows.js') }}"></script>
 
@@ -11,10 +11,11 @@
 </head>
 <body>
     <div id="congrats-banner">
-        WEHOOOOO!!!!! Du har løst detta fantastiske kryssordet. God jul min kjære
+            Du klarte det!!!
+            God jul, min kjære &lt;3
     </div>
     
-    <h1>Til Jonas &lt;3</h1>
+    <h1>*</h1>
     
     <form method="post">
         <div id="crossword-container">
@@ -102,23 +103,25 @@
                 })
                 .catch((error) => console.error('Error during fetch', error)); // debugging
             }
-    
+            
             function displaySuccessMessage() {
                 const banner = document.querySelector('#congrats-banner');
                 console.log('displaying success banner'); // Debugging
                 banner.classList.add('show');
+
             }
-    
+
             function clearMessage() {
                 const banner = document.querySelector('#congrats-banner');
                 console.log('clearing success message'); // debugging
                 banner.classList.remove('show');
             }
+           
         });
+           
         </script>
 </body>
 </html>
-
 
 
 
