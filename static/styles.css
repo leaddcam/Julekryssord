@@ -1,0 +1,90 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+#crossword-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    text-align: center;
+    margin: auto;
+}
+
+table {
+    border-collapse: collapse;
+    background-color: #ffffff;
+    margin: 20px auto;
+}
+
+td {
+    border: 1px solid #cccccc;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    position: relative; /* position used for clue numbering */
+}
+
+input[type="text"] {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border: none;
+    font-size: 16px;
+    background-color: #e9ecef;
+    box-sizing: border-box;
+}
+
+.no-input {
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+}
+
+.clue-number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 10px;
+    color: black;
+    line-height: 1; /* reduce line height for tight fitting */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li.success {
+    color: green;
+}
+
+li.error {
+    color: red;
+}
+
+#congrats-banner {
+    display: none; /* Hidden by default */
+    background-color: #28a745; /* A soothing green background for success */
+    color: #ffffff; /* White text for contrast */
+    padding: 15px;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure the banner is displayed on top of other content */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+    transition: all 0.5s ease; /* Smooth transition for display changes */
+}
+
+#congrats-banner.show {
+    display: block; /* Makes the banner visible */
+}
+
+

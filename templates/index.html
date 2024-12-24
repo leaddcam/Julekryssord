@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Til Jonas&lt;3 </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='arrows.js') }}"></script>
+
+
+</head>
+<body>
+    <div id="congrats-banner">
+        WEHOOOOO!!!!! Du har løst detta fantastiske kryssordet. God jul min kjære
+    </div>
+    
+    <h1>Til Jonas &lt;3</h1>
+    
+    <form method="post">
+        <div id="crossword-container">
+            <table>
+                {% for i, row in enumerate(crossword.grid) %}
+                    <tr>
+                        {% for j, is_box in enumerate(row) %}
+                            <td>
+                                {% if is_box %}
+                                <!-- Identify starting positions -->
+                                {% for number, _ in crossword.across_clues %}
+                                    {% if positions('across', number)[0] == (i, j) %}
+                                        <span class="clue-number">{{ number }}</span>
+                                    {% endif %}
+                                {% endfor %}
+                                {% for number, _ in crossword.down_clues %}
+                                    {% if positions('down', number)[0] == (i, j) %}
+                                        <span class="clue-number">{{ number }}</span>
+                                    {% endif %}
+                                {% endfor %}
+                                <input type="text" name="cell-{{ i }}-{{ j }}" maxlength="1">
+
+                                {% else %}
+                                    <div class="no-input"></div>
+                                {% endif %}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div id="clues" style="max-width: 600px; margin: auto;">
+            <h2>Across</h2>
+            <ul>
+                {% for number, clue in crossword.across_clues %}
+                <li><strong>{{ number }}</strong>: {{ clue }}</li>
+                {% endfor %}
+            </ul>
+            <h2>Down</h2>
+            <ul>
+                {% for number, clue in crossword.down_clues %}
+                <li><strong>{{ number }}</strong>: {{ clue }}</li>
+                {% endfor %}
+            </ul>
+        </div>    
+    </form>
+
+    <!-- JavaScript for real-time solution checking -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('input[type="text"]');
+    
+            inputs.forEach(input => {
+                input.addEventListener('input', () => {
+                    const crosswordSolution = Array.from(inputs).reduce((acc, input) => {
+                        const cellName = input.getAttribute('name');
+                        acc[cellName] = input.value.toUpperCase();
+                        return acc;
+                    }, {});
+                    
+                    console.log('current crossword solution:',crosswordSolution); // Debugging
+                    
+                    checkSolutions(crosswordSolution);
+                });
+            });
+    
+            function checkSolutions(crosswordSolution) {
+                console.log('sending solution to server:', crosswordSolution); // Debugging
+                fetch('/check', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(crosswordSolution),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('response from server:', data); // debugging
+
+                    if (data.correct) {
+                        displaySuccessMessage();
+                    } else {
+                        clearMessage();
+                    }
+                })
+                .catch((error) => console.error('Error during fetch', error)); // debugging
+            }
+    
+            function displaySuccessMessage() {
+                const banner = document.querySelector('#congrats-banner');
+                console.log('displaying success banner'); // Debugging
+                banner.classList.add('show');
+            }
+    
+            function clearMessage() {
+                const banner = document.querySelector('#congrats-banner');
+                console.log('clearing success message'); // debugging
+                banner.classList.remove('show');
+            }
+        });
+        </script>
+</body>
+</html>
+
+
+
+
